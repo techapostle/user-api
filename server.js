@@ -60,7 +60,7 @@ app.use(cors());
 // Register
 app.post("/api/user/register", (req, res) => {
   userService
-    .registerUser(req.body.user)
+    .registerUser(req.body)
     .then(() => {
       res.json({ message: "success" });
     })
@@ -72,7 +72,7 @@ app.post("/api/user/register", (req, res) => {
 // Login
 app.post("/api/user/login", (req, res) => {
   userService
-    .checkUser(req.body.user)
+    .checkUser(req.body)
     .then((user) => {
       // TODO: Generate payload
       var payload = {
