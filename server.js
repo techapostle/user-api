@@ -109,7 +109,7 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .addFavourite(req.user._id, req.params.id)
+      .addFavourite(req.body._id, req.params.id)
       .then((data) => {
         res.send.json({ data: data });
       })
@@ -125,7 +125,7 @@ app.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .removeFavourite(req.user._id, req.params.id)
+      .removeFavourite(req.body._id, req.params.id)
       .then((data) => {
         res.send.json({ data: data });
       })
