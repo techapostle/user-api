@@ -60,9 +60,9 @@ app.use(cors());
 // Register
 app.post("/api/user/register", (req, res) => {
   userService
-    .registerUser(req.user)
+    .registerUser(req.body.user)
     .then(() => {
-      res.json({ message: "Registration successful" });
+      res.json({ message: "success" });
     })
     .catch((err) => {
       res.status(422).json({ message: err });
@@ -72,7 +72,7 @@ app.post("/api/user/register", (req, res) => {
 // Login
 app.post("/api/user/login", (req, res) => {
   userService
-    .checkUser(req.user)
+    .checkUser(req.body.user)
     .then((user) => {
       // TODO: Generate payload
       var payload = {
@@ -80,7 +80,7 @@ app.post("/api/user/login", (req, res) => {
         userName: msg.userName,
       };
       var token = jwt.sign(payload, jwtOptions.secretOrKey);
-      res.json({ message: "Login successful", token: token });
+      res.json({ message: "success", token: token });
     })
     .catch((err) => {
       res.status(422).json({ message: err });
