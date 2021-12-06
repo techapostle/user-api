@@ -13,6 +13,9 @@ const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
 
+// tell passport to use our "strategy"
+passport.use(strategy);
+
 // JSON Web Token Setup
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
@@ -44,9 +47,6 @@ var strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
     next(null, false);
   }
 });
-
-// tell passport to use our "strategy"
-passport.use(strategy);
 
 // add passport as application-level middleware
 app.use(passport.initialize());
