@@ -95,7 +95,7 @@ app.get(
     userService
       .getFavourites(req.body._id)
       .then((data) => {
-        res.send.json({ data: data });
+        res.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
@@ -111,7 +111,7 @@ app.put(
     userService
       .addFavourite(req.body._id, req.params.id)
       .then((data) => {
-        res.send.json({ data: data });
+        res.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
@@ -127,7 +127,7 @@ app.delete(
     userService
       .removeFavourite(req.body._id, req.params.id)
       .then((data) => {
-        res.send.json({ data: data });
+        res.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
