@@ -73,11 +73,11 @@ app.post("/api/user/register", (req, res) => {
 app.post("/api/user/login", (req, res) => {
   userService
     .checkUser(req.body)
-    .then((user) => {
+    .then(() => {
       // TODO: Generate payload
       var payload = {
-        _id: user._id,
-        userName: user.userName,
+        _id: req.body._id,
+        userName: req.body.userName,
       };
       var token = jwt.sign(payload, jwtOptions.secretOrKey);
       res.json({ message: "success", token: token });
@@ -93,9 +93,9 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .getFavourites(req.user._id)
+      .getFavourites(req.body._id)
       .then((data) => {
-        res.json({ data: data });
+        res.send.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
@@ -109,9 +109,9 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .addFavourite(req.user._id, req.params.id)
+      .addFavourite(req.body._id, req.params.id)
       .then((data) => {
-        res.json({ data: data });
+        res.send.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
@@ -125,9 +125,9 @@ app.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .removeFavourite(req.user._id, req.params.id)
+      .removeFavourite(req.body._id, req.params.id)
       .then((data) => {
-        res.json({ data: data });
+        res.send.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
