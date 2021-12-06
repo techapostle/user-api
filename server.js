@@ -93,9 +93,9 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .getFavourites(req.body.id)
+      .getFavourites(req.user._id)
       .then((data) => {
-        res.send.json({ data: data });
+        res.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
@@ -109,9 +109,9 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .addFavourite(req.body.id, req.params.id)
+      .addFavourite(req.user._id, req.params.id)
       .then((data) => {
-        res.send.json({ data: data });
+        res.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
@@ -125,9 +125,9 @@ app.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userService
-      .removeFavourite(req.body.id, req.params.id)
+      .removeFavourite(req.user._id, req.params.id)
       .then((data) => {
-        res.send.json({ data: data });
+        res.json({ data: data });
       })
       .catch((err) => {
         res.status(422).json({ message: err });
